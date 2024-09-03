@@ -25,11 +25,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let encrypted_num2 = FheUint16::encrypt(num2, &client_key);
     println!("Time for 2nd encryptioin: {:?}", start.elapsed());
 
-    let nums = vec![10u16, 20u16, 30u16, 40u16];
-
-    // Encrypt numbers
-    let encrypted_nums: Vec<FheUint16> = nums.iter().map(|&num| FheUint16::encrypt(num, &client_key)).collect();
-
     // Perform '+' operations
     start = Instant::now();
     let sum = &encrypted_num1 + &encrypted_num2;
@@ -41,7 +36,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // Perform '-' operations
     start = Instant::now();
-    let difference = &encrypted_num1 - &encrypted_num2;
+    let difference = &encrypted_num2 - &encrypted_num1;
     println!("Time for encrypted minus: {:?}", start.elapsed());
 
     start = Instant::now();
@@ -49,28 +44,28 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("Time for decryption: {:?}", start.elapsed());
     
     // Perform '*' operations
-    start = Instant::now();
-    let product = &encrypted_num1 * &encrypted_num2;
-    println!("Time for encrypted *: {:?}", start.elapsed());
+    // start = Instant::now();
+    // let product = &encrypted_num1 * &encrypted_num2;
+    // println!("Time for encrypted *: {:?}", start.elapsed());
 
-    start = Instant::now();
-    let decrypted_product: u16 = product.decrypt(&client_key);
-    println!("Time for decryption: {:?}", start.elapsed());
+    // start = Instant::now();
+    // let decrypted_product: u16 = product.decrypt(&client_key);
+    // println!("Time for decryption: {:?}", start.elapsed());
 
     // Perform '/' operations
-    start = Instant::now();
-    let quotient = &encrypted_num1 / &encrypted_num2;
-    println!("Time for encrypted div: {:?}", start.elapsed());
+    // start = Instant::now();
+    // let quotient = &encrypted_num1 / &encrypted_num2;
+    // println!("Time for encrypted div: {:?}", start.elapsed());
 
-    start = Instant::now();
-    let decrypted_quotient: u16 = quotient.decrypt(&client_key);
-    println!("Time for decryption: {:?}", start.elapsed());
+    // start = Instant::now();
+    // let decrypted_quotient: u16 = quotient.decrypt(&client_key);
+    // println!("Time for decryption: {:?}", start.elapsed());
 
     // Print results
     println!("Sum: {}", decrypted_sum);
     println!("Difference: {}", decrypted_difference);
-    println!("Product: {}", decrypted_product);
-    println!("Quotient: {}", decrypted_quotient);
+    // println!("Product: {}", decrypted_product);
+    // println!("Quotient: {}", decrypted_quotient);
 
     assert_eq!(decrypted_sum, num1 + num2);
 
