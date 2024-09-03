@@ -7,3 +7,4 @@ edition = "2021"
 tfhe = { version = "0.7.3", features = [ "boolean", "shortint", "integer", "aarch64-unix" ] }
 rayon = "1.7"
 lazy_static = "1.4"
+crossbeam = "0.8.4"
